@@ -4,7 +4,7 @@ using namespace std;
 int main()
 {
 	MyString str1("I love world");
-	MyString str2("I love worldddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd", 80);
+	MyString str2("I love you");
 	MyString str3 = str1;
 	MyString str4;
 	str4.Input();
