@@ -10,20 +10,21 @@ int MyString::GetCount()//статична пам'ять
 MyString::MyString()
 {
     str = nullptr;
-    lenght = 0;
+    length = 0;
     count++;
 }
 MyString::MyString(const char* string)
 {
     str = new char[strlen(string) + 1];
     strcpy_s(str, strlen(string) + 1, string);
+    length = strlen(string+1);
     count++;
 }
 MyString::MyString(const MyString& string)//конструктор копіювання
 {
     str = new char[strlen(string.str) + 1];
     strcpy_s(str, strlen(string.str) + 1, string.str);
-    lenght = string.lenght;
+    length = strlen(string.str + 1);
 }
 MyString::MyString(MyString&& obj)
 {
@@ -31,6 +32,20 @@ MyString::MyString(MyString&& obj)
     length = obj.length;
     obj.str = nullptr;
     obj.length = 0;
+}
+
+MyString::MyString(initializer_list<char> arr)
+{
+    cout << "initializer list" << endl;
+    cout << arr.size() << endl;
+    length = arr.size();
+    str = new char[length + 1];
+    for (auto x = arr.begin(); x != arr.end(); x++)
+    {
+        *str = *x;
+        str++;
+    }
+    str -= length;
 }
 
 void MyString::Input()
@@ -50,7 +65,7 @@ void MyString::MyStrcpy(MyString& obj)//копирование строк
 {
     str = new char[strlen(obj.str) + 1];
     strcpy_s(str, strlen(obj.str) + 1, obj.str);
-    lenght = obj.lenght;
+    length = obj.length;
 }
 bool MyString::MyStrStr(const char* string)//поиск подстроки в строке   
 {
@@ -108,7 +123,7 @@ void MyString::MyDelChr(char c)// удаляет указанный символ
     {
         if (str[i] == c)
         {
-            lenght--;
+            length--;
             str[i] = str[i + 1];
         }
     }
@@ -175,6 +190,6 @@ void MyString::operator()()
 MyString::~MyString()
 {
     delete[]str;
-    lenght = 0;
+    length = 0;
     count--;
 }

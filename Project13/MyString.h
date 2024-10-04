@@ -1,4 +1,6 @@
 #pragma once
+#include<iostream>
+using namespace std;
 class MyString
 {
 	char* str; 
@@ -10,7 +12,8 @@ public:
 	MyString(const char* str);
 	MyString(const MyString& str);
 	MyString(MyString&& obj);
-	MyString& operator= (MyString&& obj);
+	MyString(initializer_list <char>obj);
+
 	void Input();    
 	void Output();
 	void MyStrcpy(MyString& obj);    
