@@ -1,4 +1,3 @@
-
 #include <iostream>   
 #include "MyString.h" 
 using namespace std;
@@ -32,6 +31,8 @@ MyString::MyString(MyString&& obj)
     length = obj.length;
     obj.str = nullptr;
     obj.length = 0;
+
+    cout << "Move constr"<<endl;
 }
 
 MyString::MyString(initializer_list<char> arr)
@@ -175,7 +176,26 @@ MyString& MyString::operator=(MyString&& obj)
     obj.str = nullptr;
     obj.length = 0;
 
+    cout << "Move =" << endl;
     return *this;
+}
+
+MyString& MyString::operator+=(const MyString& obj)
+{
+    MyString temp = *this;
+    int* temp1 = new int[length + obj.length];
+    for (int i = 0; i < length; i++)
+    {
+        temp1[i] = str[i];
+    }
+    for (int i = length; i < length + obj.length; i++)
+    {
+        temp1[i] = obj.str[i];
+    }
+    delete[] str;
+    *str = *temp1;
+    length += obj.length;
+    return temp;
 }
 
 char MyString::operator[](int index)

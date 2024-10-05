@@ -6,6 +6,8 @@ class MyString
 	char* str; 
 	int length;
 	static int count;
+	friend ostream& operator<<(ostream& os, MyString& str);
+	friend istream& operator>>(istream& is, MyString& str);
 public:
 	static int GetCount();    
 	MyString();
@@ -26,6 +28,7 @@ public:
 
 	MyString& operator=(const MyString& obj);
 	MyString& operator= (MyString&& obj);
+	MyString& operator +=(const MyString& obj);
 
 	char operator[] (int index);
 	void operator() ();
